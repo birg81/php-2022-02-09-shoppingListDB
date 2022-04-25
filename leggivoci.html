@@ -1,0 +1,22 @@
+<html lang='it'>
+<head>
+</head>
+<body>
+<div id="printHere">empty</div>
+<script>
+async function readData(tag = '#printHere', URL = './listaspesa.json.php') {
+	const
+		out = document.querySelector(tag),
+		jsonData =
+			await fetch(URL)
+				.then(response => response.json());
+	out.innerHTML =
+		'<table><tr>' +
+		jsonData.map(row => `<td>${Object.values(row).join('</td><td>')}</td>`)
+			.join('</tr><tr>') +
+		'</tr></table>';
+}
+readData('#printHere');
+</script>
+</body>
+</html>
